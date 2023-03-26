@@ -400,25 +400,27 @@ document.getElementById('today-highlight-text').innerText='Day Highlight'
        });
        
    }
-    
+      
 }
 const filterBtn1= document.getElementById('filter1')
 const filterBtn2= document.getElementById('filter2')
 const filterBtn3= document.getElementById('filter3')
 const filterBtn4= document.getElementById('filter4')
-filterBtn1.innerText=(futureDateCalculator(1))
-filterBtn2.innerText=(futureDateCalculator(2))
-filterBtn3.innerText=(futureDateCalculator(3))
-filterBtn4.innerText=(futureDateCalculator(4))
+// filterBtn1.innerText=(futureDateCalculator(1))
+// filterBtn2.innerText=(futureDateCalculator(2))
+// filterBtn3.innerText=(futureDateCalculator(3))
+// filterBtn4.innerText=(futureDateCalculator(4))
 
-filterBtn1.addEventListener('click', ()=>updateFilter(0))
-filterBtn2.addEventListener('click', ()=>updateFilter(1))
-filterBtn3.addEventListener('click', ()=>updateFilter(2))
-filterBtn4.addEventListener('click', ()=>updateFilter(3))
+filterBtn1.addEventListener('click', ()=>updateFilter2(0))
+filterBtn2.addEventListener('click', ()=>updateFilter2(1))
+filterBtn3.addEventListener('click', ()=>updateFilter2(2))
+filterBtn4.addEventListener('click', ()=>updateFilter2(3))
+
+const updateFilter2=(value=1,lat=defaultlat, lon=defaultlon,city=defaultcity, country=defaultcountry)=>{
+$(".upcoming-forecast").hide().slice(0, value + 1).show();
 
 
-
-
+}
 
 // initial function call when app opens
 async function pageOpen() {
@@ -485,10 +487,6 @@ async function pageOpen() {
     updateUpcomingForecase(forecastdata)
    });
 
-
-   
-  
-  
   
 }
 pageOpen();
