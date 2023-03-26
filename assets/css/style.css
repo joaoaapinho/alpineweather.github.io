@@ -327,6 +327,20 @@ color: white;
 #logo{
   cursor: pointer;
 }
+
+footer {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.logo-text img, .logo-text span {
+  display: inline-block;
+}
+
+.rights-text {
+  display: inline-block;
+}
+
 @media screen and (max-width: 992px) and (min-width: 768px) {
   .responsive-icon{
     font-size: 22px;

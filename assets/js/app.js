@@ -70,6 +70,12 @@ async function updateViewDisplay(location, weatherdata) {
     let {country, lat, lon}= location;
     let {description, icon }= weather[0]
     let {temp, feels_like,pressure, humidity}= main
+
+    // Round the temperature value
+    let roundedTemp = Math.round(temp);
+
+
+
 console.log(weatherdata);
     if (sys.sunrise) {
         filteredSunrise=sys.sunrise
@@ -86,7 +92,7 @@ console.log(filteredSunrise);
 console.log(weatherdata);
 weatherdataDiv.innerHTML=`
 <h1>
-            ${temp}&#8451;
+            ${roundedTemp}&#8451;
         </h1>
         <span>
         <img src="https://openweathermap.org/img/wn/${icon}@2x.png" height='30' width='50' alt="weather-des">
@@ -157,10 +163,10 @@ async function updateHourlyForecaseDisplay(hourlydata) {
     document.querySelector('.hourly-forecast-img3').src= `https://openweathermap.org/img/w/${forecaseDatas[2].weather[0].icon}.png`;
     document.querySelector('.hourly-forecast-img4').src= `https://openweathermap.org/img/w/${forecaseDatas[3].weather[0].icon}.png`;
 
-    document.querySelector('.hourly-forecast-temp1').innerText= forecaseDatas[0].main.temp+'℃';
-    document.querySelector('.hourly-forecast-temp2').innerText= forecaseDatas[1].main.temp+'℃';
-    document.querySelector('.hourly-forecast-temp3').innerText= forecaseDatas[2].main.temp+'℃';
-    document.querySelector('.hourly-forecast-temp4').innerText= forecaseDatas[3].main.temp+'℃';
+    document.querySelector('.hourly-forecast-temp1').innerText= Math.round(forecaseDatas[0].main.temp)+'℃';
+    document.querySelector('.hourly-forecast-temp2').innerText= Math.round(forecaseDatas[1].main.temp)+'℃';
+    document.querySelector('.hourly-forecast-temp3').innerText= Math.round(forecaseDatas[2].main.temp)+'℃';
+    document.querySelector('.hourly-forecast-temp4').innerText= Math.round(forecaseDatas[3].main.temp)+'℃';
 
 }
 // upcoming forecast view
@@ -182,10 +188,10 @@ async function updateUpcomingForecase(upcomingdata) {
     document.querySelector('.up-forecast-img3').src= `https://openweathermap.org/img/w/${dailyData[2].weather[0].icon}.png`;
     document.getElementById('up-forecast-img4').src= `https://openweathermap.org/img/w/${dailyData[3].weather[0].icon}.png`;
 
-    document.querySelector('.up-forecast-temp1').innerText= dailyData[0].main.temp+'℃';
-    document.querySelector('.up-forecast-temp2').innerText= dailyData[1].main.temp+'℃';
-    document.querySelector('.up-forecast-temp3').innerText= dailyData[2].main.temp+'℃';
-    document.querySelector('.up-forecast-temp4').innerText= dailyData[3].main.temp+'℃';
+    document.querySelector('.up-forecast-temp1').innerText= Math.round(dailyData[0].main.temp)+'℃';
+    document.querySelector('.up-forecast-temp2').innerText= Math.round(dailyData[1].main.temp)+'℃';
+    document.querySelector('.up-forecast-temp3').innerText= Math.round(dailyData[2].main.temp)+'℃';
+    document.querySelector('.up-forecast-temp4').innerText= Math.round(dailyData[3].main.temp)+'℃';
 
 }
 
@@ -238,7 +244,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 500);
   });
 });
-
 
 // when search items are clicked
 
