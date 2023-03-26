@@ -9,6 +9,10 @@ A simple and responsive weather dashboard that provides real-time weather inform
 ![Alt text](assets/images/logo_w_background.png?raw=true "Alpine Weather")
 
 ---/---
+### Demo
+
+![Alt Text](/assets/images/AlpineWeather_demo/your_gif_name.gif)
+
 
 ### Technology Stack
 
