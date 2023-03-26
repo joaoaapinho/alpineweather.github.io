@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Bootstrap CSS and Font Awesome -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>   
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Weather project</title>
+<link rel="icon" type="image/x-icon" href="/assets/images/mountain_logo.png">
+  </head>
+  <body>
+
+    <!-- Top menu section -->
+    <section >
+        <div class="header-section ">
+            <!-- Header row -->
+            <div class=" row header">
+                <!-- Logo section -->
+                <div class="logo-section d-flex justify-content-center align-items-center order-1">
+                    <img src = "/assets/images/mountain_logo.png" alt="Logo">
+
+                    <div class="logo-text" id="logo">
+                        <h4>Alpine</h>
+                    <h4 class="">Weather</h4>
+                    </div>
+                </div>
+                <!-- Search bar -->
+                <div class=" has-search col-md-4 col-sm-8 order-3 order-md-2 mt-4 mt-md-0">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" id="search" autocomplete="off" class="form-control search-field" placeholder="Search for city">
+        
+        <!-- Start of search result section -->
+        <div class=" row justify-content-center search-result-section">
+        <div class=" ml-4  mb-3 col-12">
+           
+
+            <div class="search-result-list pt-2">
+
+            </div>
+            <!-- End of search result section -->
+        </div>
+        </div>
+                  </div>
+
+                  <!-- Current location button -->
+                  <div class="order-2 order-md-3 cursor-pointer">
+                  <a id="current-location" aria-disabled="true" class=" d-flex location-btn" data-current-location-btn>
+                    <span class="">
+                        <i class="fa fa-compass compass-icon" aria-hidden="true"></i>
+                    </span>
+                    <span class="header-span" >Current Location</span>
+                </a>
+            </div>
+
+            <!-- Filter by upcoming dates dropdown -->
+            <div class="dropdown order-4 mt-4 mt-md-0 ">
+                <button class="btn btn-secondary dropdown-toggle filter-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter by upcoming dates
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                
+                    <!-- Dropdown items for filtering -->
+                  <a class="dropdown-item"  id="filter1">Tomorrow</a>
+                  <a class="dropdown-item"  id="filter2">Day 2</a>
+                  <a class="dropdown-item"  id="filter3">Day 3</a>
+                  <a class="dropdown-item"  id="filter4">Day 4 </a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Main content section -->
+        <section class="container  mt-5 mt-sm-0 body-section">
+                <div class="row justify-content-center align-items-center mt-2 mt-md-0">
+            
+            <!-- Today's highlights section -->
+            <!-- Default values will be mock values. These will change once a location is selected (current or searched) -->
+            <div class="col-md-4 today-highlight p-4 mr-3 ml-3 mt-5 mt-md-0 order-2 order-md-1" >
+                <h6 id="today-highlight-text">Today Highlights</h6>
+                <div class="air-quality ">
+                    <div class="d-flex justify-content-between">
+                    <div>
+                        <span class="text-muted">Air Quality Index</span>
+                    </div>
+                </div>
+
+                    <!-- Air quality values -->
+                    <div class="values row mt-3 justify-content-around ">
+                        <div class="col-2">
+                            <i class="fa fa-thermometer-half thermo-icon responsive-icon" aria-hidden="true"></i></div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-muted values-text">
+                                O3
+                            </span>
+                            <h4 class="values-number o3-value">
+                                3.90
+                            </h4>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-muted values-text">
+                                NH3
+                            </span>
+                            <h4 class="values-number nh3-value">
+                                3.90
+                            </h4>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-muted values-text">
+                                SO2
+                            </span>
+                            <h4 class="values-number so2-value">
+                                3.90
+                            </h4>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-muted values-text">
+                                NO2
+                            </span>
+                            <h4 class="values-number no2-value">
+                                3.90
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                    <!-- Humidity and pressure section -->
+                    <div class="th-last-div row mt-3 justify-content-center align-items-center">
+                        <div class="col-5 bg-dark p-2">
+                            <div>
+                                <p class="text-muted sun-text">Humidity</p>
+                            </div>
+                            <div class="d-flex justify-content-between pl-2">
+                                <span>
+                                    <i class="fa fa-tint water-drop responsive-icon" aria-hidden="true"></i>
+                                </span>
+                                <h5 class="pr-2 humidity-value"> 82%</h5>
+                            </div>
+                        </div>
+                        <div class="col-5 bg-dark p-2 ml-3">
+                            <div>
+                                <p class="text-muted sun-text">Pressure</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>
+                                    <i class="fa fa-map-o water-drop pressure-icon" aria-hidden="true"></i>
+                                </span>
+                                <h5 class="pressure-value"> 1025hPa</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+            </div>
+            <div class="col-md-3 mt-5 mt-md-0 order-1 order-md-2">
+                <div class="current-weather-inner p-4">
+<h6>Current weather</h6>
+<div class="current-forecast mt-3">
+    <div class="current-forecast-inner">
+        
+    </div>
+    <hr>
+    <div class="currrent-weather-last">
+
+    </div>
+</div>
+                </div>
+                
+
+            </div>
+
+            <!-- Third section of body sunset and sunrise -->
+            <div class="col-md-4 mt-5 mt-md-0 order-3 order-md-3" >
+                <div class="sun-setrise p-4">
+                <div>
+                    <h6>Visual Setting</h6>
+                    <p class="text-muted">Outdoor Details</p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="d-flex ">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <span>
+                                    <i class="fa fa-sun-o sun-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="ml-3">
+                               
+                                <span class="text-muted values-text">
+                                    Sunrise (UTC)
+                                </span>
+                                <h4 class="sunrise-value">6.37</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex ml-3">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <span>
+                                    <i class="fa fa-moon-o mon-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="ml-3">
+                                <span class="text-muted values-text">
+                                    Sunset (UTC)
+                                </span>
+                                <h4 class="sunset-value">6.37</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="th-last-div row mt-3 justify-content-center align-items-center">
+                    <div class="col-5 bg-dark p-2 visibility-section">
+                        <div>
+                            <p class="text-muted sun-text mb-2">Visibility</p>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center visibility-texticon">
+                            <span>
+                                <i class="fa fa-eye sun-icon pr-1" aria-hidden="true"></i>
+                            </span>
+                            <h5 class="pr-2 visibility-text mb-0"> 12 KM</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+          
+        </div>
+
+        <!-- Body of the last section upcoming forecast and hourly forecast -->
+        <div class="row mt-5 mb-5 pb-5">
+            <!-- Start of hourly forecast section -->
+            <div class="col-lg-6 col-md-12 d-flex flex-column h-forcast-main ">
+                <div class="ml-0 ml-md-3">
+                    <h6 class="text-center mb-3">Hourly forecast</h6>
+                </div>
+
+                <!-- Hourly forecast cards -->
+                <div class="temp-cart d-flex mt-2">
+
+                    <!-- Hourly forecast card 1 -->
+                    <div class="col-3 hourly-forecast">
+                        <div class="hourly-inner text-center">
+                            <span class="hourly-forecast-time1">
+                                9
+                            </span>
+                            <span>
+                                <img class="hourly-forecast-img1" src="https://openweathermap.org/img/w/02d.png" alt="image">
+                            </span>
+                            <span class="hourly-forecast-temp1">
+                                5&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Hourly forecast card 2 -->
+                    <div class="col-3 hourly-forecast">
+                        <div class="hourly-inner text-center">
+                            <span class="hourly-forecast-time2">
+                                12
+                            </span>
+                            <span>
+                                <img class="hourly-forecast-img2" src="https://openweathermap.org/img/w/02d.png" alt="image">
+                            </span>
+                            <span class="hourly-forecast-temp2">
+                                5&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Hourly forecast card 3 -->
+                    <div class="col-3 hourly-forecast">
+                        <div class="hourly-inner text-center">
+                            <span class="hourly-forecast-time3">
+                                9
+                            </span>
+                            <span>
+                                <img class="hourly-forecast-img3" src="https://openweathermap.org/img/w/02d.png" alt="image3">
+                            </span>
+                            <span class="hourly-forecast-temp3">
+                                5&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Hourly forecast card 4 -->
+                    <div class="col-3 hourly-forecast">
+                        <div class="hourly-inner">
+                            <span class="hourly-forecast-time4">
+                                9
+                            </span>
+                            <span>
+                                <img class="hourly-forecast-img4" src="https://openweathermap.org/img/w/02d.png" alt="forecast-image">
+                            </span>
+                            <span class="hourly-forecast-temp4">
+                                14&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="h-divider">
+                    <!-- <hr class="solid"> -->
+                </div>
+            </div>
+            <!-- End of hourly forecast section -->
+            
+            <!-- Start of upcoming forecast section -->
+            <div class="col-lg-6 col-md-12 d-flex flex-column mb-5 mb-md-0 mt-5 mt-md-0 ">
+                <div class="upcoming-forecast-title">
+                    <h6 class="text-center mb-3">Upcoming forecast</h6>
+                </div>
+                <!-- Upcoming forecast cards -->
+                <div class="temp-cart d-flex mt-2">
+                    <!-- Upcoming forecast card 1 -->
+                    <div class="col-3 upcoming-forecast ">
+                        <div class="upcoming-inner">
+                            <span class="up-forecast-time1">
+                                29 Mar                            
+                            </span>
+                            <span>
+                                <img class="up-forecast-img1" src="https://openweathermap.org/img/w/02d.png" alt="forecast">
+                            </span>
+                            <span class="up-forecast-temp1">
+                                15&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming forecast card 2 -->
+                    <div class="col-3 upcoming-forecast">
+                        <div class="upcoming-inner">
+                            <span class="up-forecast-time2">
+                                28 Mar
+                            </span>
+                            <span>
+                                <img class="up-forecast-img2" src="https://openweathermap.org/img/w/02d.png" alt="forecast">
+                            </span>
+                            <span class="up-forecast-temp2">
+                                5&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming forecast card 3 -->
+                    <div class="col-3 upcoming-forecast">
+                        <div class="upcoming-inner">
+                            <span class="up-forecast-time3">
+                                28 Mar
+                            </span>
+                            <span>
+                                <img class="up-forecast-img3" src="https://openweathermap.org/img/w/02d.png" alt="forecast">
+                            </span>
+                            <span class="up-forecast-temp3">
+                                5&#8451;
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming forecast card 4 -->
+                    <div class="col-3 upcoming-forecast">
+                        <div class="upcoming-inner">
+                            <span class="up-forecast-time4">
+                                28 Mar
+                            </span>
+                            <span>
+                                <img class="up-forecast-img4" id="up-forecast-img4" src="" alt="forecast">
+                            </span>
+                            <span class="up-forecast-temp4">
+                                5&#8451;
+                            </span>
+    
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End of upcoming forecast section -->
+
+        </div>
+
+    <!-- End of main section -->        
+    </section>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <p>IE School of Science and Technology</p>
+            <p>All rights reserved &copy; João André Pinho</p>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+<!-- Importing Bootstrap JavaScript and the custom JavaScript file -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+	<script src="./assets/js/app.js" type="module"></script>
+   
+  </body>
+</html>
+
