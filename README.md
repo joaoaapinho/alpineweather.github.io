@@ -11,7 +11,7 @@ A simple and responsive weather dashboard that provides real-time weather inform
 ---/---
 ### Demo
 
-![Alt Text](/assets/images/AlpineWeather_demo/your_gif_name.gif)
+![Alt Text](/assets/images/AlpineWeather_demo.gif)
 
 
 ### Technology Stack
