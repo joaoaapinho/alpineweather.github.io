@@ -1,13 +1,19 @@
+// Declare API key.
 const API_KEY= 'ecd156e81e52ba3fb0d39a8f32432b6e';
+
+// Function to fetch data from the API.
 export const fetchApi = function (URL, callback) {
 
     fetch(`${URL}&appid=${API_KEY}`)
     .then(res => res.json())
     .then(data => callback(data))
 }
+
+// Declare default latitude, longitude.
 let defaultlat=38.736946;
 let defaultlon= 9.142685;
 
+// Declare variables for daily data, air quality data, city, country, sunrise, and sunset.
 let dailyData=[];
 let airdataForecast=[];
 let defaultcity='Lisbon';
@@ -15,6 +21,7 @@ let defaultcountry='Lisbon, PT';
 let filteredSunrise;
 let filteredSunset;
 
+// Define API endpoints.
 export const apiUrl={
     getDefaultWeather(lat,lon){
         return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric`
@@ -32,7 +39,7 @@ export const apiUrl={
    
 }
 
-// get 12h time from timestamp format
+// Function to format time.
 function formatTime(value) {
   const timeString= new Date(value*1000).toString().slice(15,25)
     const [hourString, minute] = timeString.split(":");
@@ -40,49 +47,40 @@ function formatTime(value) {
     return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
 }
 
-// get 12h time from timestamp format
+// Function to format date.
 function formatDate(value) {
     const date= new Date(value*1000).toString().slice(0,15).split(' ')[2]
     const month= new Date(value*1000).toString().slice(0,15).split(' ')[1]
     
       return (date + " " + month);
   }
-//  sunrise / sunset calculation
+
+// Function to calculate sunrise and sunset.
 let getSunriseSunSet = (function (value) {
     let res = new Date(value*1000);
     // res.toUTCString()
     let f=res.toUTCString().slice(17, 22)
     return f;
-    // let Hour = res.getHours();
-    // let Min = res.getMinutes();
-    // if (Min < 10) {
-    //     Min = '0' + Min
-    // };
-    // return `${Hour}:${Min}`;
-
-
-
-    // return res.toUTCString().slice(17, 22)
 });
-// update view screen function
+
+// Function to update the view with current weather data.
 async function updateViewDisplay(location, weatherdata) {
     let {main, weather,sys, visibility,dt}= weatherdata;
     let {country, lat, lon}= location;
-    let {description, icon }= weather[0]
-    let {temp, feels_like,pressure, humidity}= main
+    let {description, icon }= weather[0];
+    let {temp, feels_like,pressure, humidity}= main;
 
     // Round the temperature value
     let roundedTemp = Math.round(temp);
 
 
-
 console.log(weatherdata);
     if (sys.sunrise) {
-        filteredSunrise=sys.sunrise
-        filteredSunset= sys.sunset
+        filteredSunrise=sys.sunrise;
+        filteredSunset= sys.sunset;
     }
 console.log(filteredSunrise);
-    // getting the DOM
+    // Getting the DOM (Document Object Model).
     const weatherdataDiv = document.querySelector('.current-forecast-inner');
     const currentWetherCountryDiv = document.querySelector('.currrent-weather-last');
     const sunsetvalueDiv = document.querySelector('.sunset-value');
@@ -119,11 +117,12 @@ sunrisevalueDiv.innerText=getSunriseSunSet(filteredSunrise)
 sunsetvalueDiv.innerText=getSunriseSunSet(filteredSunset)
 visibilitytextDiv.innerText= visibility/1000+' KM'
 
-// humidity & pressure
+// Update Humidity & Pressure.
 document.querySelector('.humidity-value').innerText=humidity+ '%';
 document.querySelector('.pressure-value').innerText=pressure +'hPa';
 }
 
+// Function to update the air pollution data.
 async function updateAirPollutionDataDisplay(filter=false, airdata) {
     if (filter===false) {
         
@@ -145,7 +144,7 @@ async function updateAirPollutionDataDisplay(filter=false, airdata) {
    
 }
 
-// hourly forecast datas view
+// Function to update the hourly forecast data.
 async function updateHourlyForecaseDisplay(hourlydata) {
     const {list} = hourlydata;
     const forecaseDatas= list.slice(0,8)
@@ -169,13 +168,14 @@ async function updateHourlyForecaseDisplay(hourlydata) {
     document.querySelector('.hourly-forecast-temp4').innerText= Math.round(forecaseDatas[3].main.temp)+'℃';
 
 }
-// upcoming forecast view
+
+// Function to update the upcoming forecast data.
 async function updateUpcomingForecase(upcomingdata) {
     const {list} = upcomingdata;
     const upcomingforecastDatas= list
      dailyData= upcomingforecastDatas.filter(e=> e.dt_txt.split(' ')[1]==='00:00:00')
    
-    // putting value by DOM
+    // Updating values by the DOM.
 
     document.querySelector('.up-forecast-time1').innerText= formatDate(dailyData[0].dt)
     document.querySelector('.up-forecast-time2').innerText= formatDate(dailyData[1].dt);
@@ -196,20 +196,22 @@ async function updateUpcomingForecase(upcomingdata) {
 }
 
 
-// get location from search
+// Function to get location data from the search input.
 async function getLocation(search) {
     let locationFetch = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=3&appid=${API_KEY}`, {mode: 'cors'});
     let locationData = await locationFetch.json();
     return locationData
 }
 
-// search functionalities
+// Function to handle the search functionality.
 async function handleSearch(value) {
 
     let locationArray= await getLocation(value).then(res=>{
         return res;
       })
+
     //   console.log(locationArray);
+
     const searchResultShow= document.querySelector('.search-result-list')
     searchResultShow.innerHTML= locationArray.map(item=>(
     `<div class=" d-flex result">
@@ -231,6 +233,7 @@ async function handleSearch(value) {
     addClickevent()
 }
 
+// Add event listener for the search input.
 const search = document.getElementById('search');
 let search_term = '';
 let searchtimer;
@@ -245,8 +248,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// when search items are clicked
-
+// Function to add a click event listener for the search result items.
 function addClickevent() {
     const clickedItem= document.querySelectorAll('.single-result-item')
 
@@ -269,17 +271,17 @@ function addClickevent() {
             document.getElementById('search').value=''
             search_term = '';
           });
-       })
-        
-    
+       })    
 }
 
-// after clicking on current location
+// Function to execute when current location button is clicked.
 const currentLocationBtn = document.getElementById('current-location');
 
 window.addEventListener("DOMContentLoaded", () => {
     currentLocationBtn.addEventListener("click", (e) => {
-        getLocation()
+        getLocation();
+
+        // Function to get user's current location.
         function getLocation() {
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -288,6 +290,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
           }
           
+          // Function to show user's current position.
           function showPosition(position) {
             const lat= position.coords.latitude;
             const lon= position.coords.longitude;
@@ -306,6 +309,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
           }
           
+          // Function to handle errors while fetching user's location.
           function showError(error) {
             switch(error.code) {
               case error.PERMISSION_DENIED:
@@ -321,11 +325,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 alert("An unknown error occurred.")
                 break;
             }
-          }
-   
+          } 
   });
 });
 
+// Function to update dashboard after search.
 async function updateAfterSearch(city, country, lat, lon) {
   const getweatherData = await fetchApi(apiUrl.getDefaultWeather(lat, lon), function callback(data) {
     updateViewDisplay({ country: `${city + ', ' + country}`, lat, lon }, data, true);
@@ -345,26 +349,7 @@ async function updateAfterSearch(city, country, lat, lon) {
   await document.querySelector('.search-result-section').classList.add('d-none');
   }
 
-
-    // const getweatherData= await fetchApi(apiUrl.getDefaultWeather(lat, lon), function callback (data){
-       
-    //     updateViewDisplay({country:`${city +', '+country}`, lat, lon}, data,true);
-    
-    //    });
-    //   await fetchApi(apiUrl.getAirPollution(lat, lon), function callback (airdata){
-    //     updateAirPollutionDataDisplay(false, airdata);
-    //    });
-    
-    //   await fetchApi(apiUrl.getForecast(lat, lon), function callback (forecastdata){
-    //     updateHourlyForecaseDisplay(forecastdata);
-    //     updateUpcomingForecase(forecastdata);
-    //    });
-
-    //    await document.querySelector('.search-result-section').classList.add('d-none');
-//}
-
-
-// filter functionalities
+// Calculate future dates.
 const futureDateCalculator=(count)=>{
     const today = new Date()
 const date = new Date(today)
@@ -373,6 +358,8 @@ date.setHours(0,0,0,0)
  date.toString().slice(0,10).split(' ')[1]
  return date.toString().slice(0,10).split(' ')[1] + ' '+ date.toString().slice(0,10).split(' ')[2];
 }
+
+// Function to update dashboard after applying a filter.
 async function updateAfterFilter(city, country, lat, lon) {
    
 }
@@ -401,20 +388,15 @@ document.getElementById('today-highlight-text').innerText='Day Highlight'
     filteredAirForecast= upcomingAirforecastDatas.filter(e=> e.dt===filteredForecast[value].dt)
     updateAirPollutionDataDisplay(true, filteredAirForecast)
        });
-   
-       });
-       
-   }
-      
+       });  
+   }      
 }
+
+// Event listeners for the filter buttons.
 const filterBtn1= document.getElementById('filter1')
 const filterBtn2= document.getElementById('filter2')
 const filterBtn3= document.getElementById('filter3')
 const filterBtn4= document.getElementById('filter4')
-// filterBtn1.innerText=(futureDateCalculator(1))
-// filterBtn2.innerText=(futureDateCalculator(2))
-// filterBtn3.innerText=(futureDateCalculator(3))
-// filterBtn4.innerText=(futureDateCalculator(4))
 
 filterBtn1.addEventListener('click', ()=>updateFilter2(0))
 filterBtn2.addEventListener('click', ()=>updateFilter2(1))
@@ -423,14 +405,12 @@ filterBtn4.addEventListener('click', ()=>updateFilter2(3))
 
 const updateFilter2=(value=1,lat=defaultlat, lon=defaultlon,city=defaultcity, country=defaultcountry)=>{
 $(".upcoming-forecast").hide().slice(0, value + 1).show();
-
-
 }
 
-// initial function call when app opens
+// Function to execute when the app opens.
 async function pageOpen() {
 
-    // getting current location
+    // Getting the user's current location.
     getLocation()
         function getLocation() {
             if (navigator.geolocation) {
@@ -476,7 +456,7 @@ async function pageOpen() {
           }
 
 
-
+  // Fetching weather data and updating the dashboard.
    const getweatherData= fetchApi(apiUrl.getDefaultWeather(defaultlat, defaultlon), function callback (data){
     // return data;
     // console.log(data)
@@ -496,4 +476,5 @@ async function pageOpen() {
 }
 pageOpen();
 
+// Add event listener for the logo to refresh the page when clicked.
 document.getElementById('logo').addEventListener('click', ()=>pageOpen())

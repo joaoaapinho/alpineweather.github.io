@@ -10,13 +10,17 @@ A simple and responsive weather dashboard that provides real-time weather inform
 
 ---/---
 
+### Technology Stack
+
+Javascript, Bootstrap, HTML and CSS
+
 ### Features
 - Automatically detects user's location on page load;
 - Search for weather information by city and country;
 - Displays current weather conditions;
 - Displays air pollution data;
-- Hourly weather forecast for the next 48 hours;
-- Daily weather forecast for the next 7 days;
+- Hourly weather forecast for the current day;
+- Daily weather forecast for the next 4 days with filtering;
 - Sunrise and sunset times.
 
 ### How it Works
@@ -34,11 +38,14 @@ The weather data is fetched from the OpenWeatherMap API, which provides current 
 The dashboard is updated with the fetched data using various functions:
 
   - updateViewDisplay(): Updates the current weather conditions, including temperature, description, icon, date, and location. It also updates the sunrise, sunset, humidity, pressure, and visibility when isSearch parameter is set to true.
-  - updateAirPollutionDataDisplay(): Updates the air pollution data.
-  - updateHourlyForecaseDisplay(): Updates the hourly weather forecast for the next 48 hours.
-  - updateUpcomingForecase(): Updates the daily weather forecast for the next 7 days.
+  - updateAirPollutionDataDisplay(): Updates the air quality data.
+  - updateHourlyForecaseDisplay(): Updates the hourly weather forecast for current day.
+  - updateUpcomingForecase(): Updates the daily weather forecast for the next 4 days.
+
+• **Filter Functionality:**
+Users can filter the displayed weather information based on the amount of days they want to see in advance. The filter function is triggered when the user selects a filter from the dropdown menu. The function filters the number of forecasted weather cards that are displayed, depending on the number of selected days.
 
 These functions make use of the fetched data and update the corresponding HTML elements with the relevant information.
 
 
-(Disclaimer: For the purpose of the exercise the sunset and sunrise times were kept in UTC format - Universal Time Coordinated Format, hence some possible time differences may arise depending on the users' region).
+(Disclaimer: For the purpose of the exercise, the sunset and sunrise times were kept in UTC format - Universal Time Coordinated Format, hence some possible time differences may arise depending on the users' region. Additionally, because of the free nature of the OpenWeather API only the upcoming temperatures for the following 4 days at midnight could be retrived).
