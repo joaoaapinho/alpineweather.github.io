@@ -1,12 +1,12 @@
-**JavaScript**
+<p align="center">
+  <img src="assets/images/logo_w_background.png?raw=true" alt="Alpine Weather logo" width="20%">
+</p>
 
-**Individual Assignment**
+<h3 align="center">Alpine Weather Dashboard</h3>
 
-## Alpine Weather Dashboard
+<p align="center"><b>Done by:</b> João André Pinho</p>
 
 A simple and responsive weather dashboard that provides real-time weather information, air pollution data, and weather forecasts for any location.
-
-![Alt text](assets/images/logo_w_background.png?raw=true "Alpine Weather")
 
 ---/---
 ### Demo
