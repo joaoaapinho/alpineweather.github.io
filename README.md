@@ -6,7 +6,7 @@
 
 <p align="center"><b>Done by:</b> João André Pinho</p>
 
-<h2>🔗🔑 Project Links and User Credentials </h2>
+<h2>🔗🔑 Project Link </h2>
 
 Link:
 - **Alpine Weather Web App** - https://joaoaapinho.github.io/alpineweather.github.io/
