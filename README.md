@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/images/logo_w_background.png?raw=true" alt="Alpine Weather logo" width="20%">
+  <img src="assets/images/logo_w_background.png?raw=true" alt="Alpine Weather logo" width="50%">
 </p>
 
 <h3 align="center">Alpine Weather Dashboard</h3>
