@@ -53,7 +53,7 @@ The dashboard is updated with the fetched data using various functions:
   - updateHourlyForecaseDisplay(): Updates the hourly weather forecast for current day.
   - updateUpcomingForecase(): Updates the daily weather forecast for the next 4 days.
 
-• ** 🌪️ Filter Functionality:**
+• **🌪️ Filter Functionality:**
 Users can filter the displayed weather information based on the amount of days they want to see in advance. The filter function is triggered when the user selects a filter from the dropdown menu. The function filters the number of forecasted weather cards that are displayed, depending on the number of selected days.
 
 These functions make use of the fetched data and update the corresponding HTML elements with the relevant information.
